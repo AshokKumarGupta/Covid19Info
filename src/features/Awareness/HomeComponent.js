@@ -19,7 +19,7 @@ const DATA = [
         redirect: "https://www.covid19india.org/"
       },
       {
-        title: "No of cases (World)",
+        title: "No of cases(World)",
         redirect: "https://www.worldometers.info/coronavirus/"
       },
       {
@@ -29,11 +29,19 @@ const DATA = [
     ]
   },
   {
-    title: "Awareness",
+    title: "Hygiene & Health tips",
     data: [
       {
-        title: "Hygiene",
-        redirect: "Hygiene"
+        title: "Personal hygiene",
+        redirect: "Personal hygiene"
+      },
+      {
+        title: "Home hygiene",
+        redirect: "Personal hygiene"
+      },
+      {
+        title: "Food hygiene",
+        redirect: "Food hygiene"
       },
       {
         title: "Health Tips",
@@ -42,8 +50,13 @@ const DATA = [
       },
       {
         title: "When you come from outside.",
-        redirect: "Hygiene"
-      },
+        redirect: "FoodHygiene"
+      }
+    ]
+  },
+  {
+    title: "Useful links",
+    data: [
       {
         title: "Helpline nos",
         redirect: "https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf"
@@ -86,14 +99,18 @@ export default class HomeComponent extends Component {
         <SectionList
           sections={DATA}
           keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => (
-            <Button
-              title={item.title}
-              onPress={() => {
-                console.log(item);
-                this._handleRedirect(item);
-              }}
-            />
+          renderItem={({ item }, index) => (
+            <React.Fragment>
+              <Button
+                style={styles.btnElement}
+                title={item.title}
+                color="#20639b"
+                accessibilityLabel={"Learn more about " + item.title}
+                onPress={() => {
+                  this._handleRedirect(item);
+                }}
+              />
+            </React.Fragment>
           )}
           renderSectionHeader={({ section: { title } }) => (
             <Text style={styles.header}>{title}</Text>
@@ -121,5 +138,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24
+  },
+  btnElement: {
+    fontSize: 18,
+    padding: 10
   }
 });

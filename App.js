@@ -11,15 +11,62 @@ import {
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import HygieneComponent from "./src/features/Awareness/HygieneComponent";
+import PersonalHygieneComponent from "./src/features/Awareness/PersonalHygieneComponent";
+import FoodHygieneComponent from "./src/features/Awareness/FoodHygiene";
 import HomeComponent from "./src/features/Awareness/HomeComponent";
+
+const Stack = createStackNavigator();
+function NavigatorConfig() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeComponent} />
+      <Stack.Screen
+        name="Personal hygiene"
+        component={PersonalHygieneComponent}
+      />
+      <Stack.Screen name="Food hygiene" component={FoodHygieneComponent} />
+      <Stack.Screen name="Home hygiene" component={PersonalHygieneComponent} />
+    </Stack.Navigator>
+  );
+}
+
+export default class App extends Component {
+  state = {
+    result: null
+  };
+  render() {
+    return (
+      <NavigationContainer>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <View style={styles.logo}>
+              <Image
+                style={styles.logoImage}
+                source={require("./assets/logo.png")}
+              />
+            </View>
+            <Text style={styles.logoText}>
+              All information related to Covid!
+            </Text>
+          </View>
+          <View style={styles.body}>
+            <SafeAreaView style={styles.container}>
+              <NavigatorConfig />
+            </SafeAreaView>
+          </View>
+          <View style={styles.footer}></View>
+        </View>
+      </NavigationContainer>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   header: {
-    height: "20%",
+    height: "25%",
     backgroundColor: "#d7fffd",
     alignItems: "center",
     justifyContent: "center"
@@ -45,8 +92,9 @@ const styles = StyleSheet.create({
     textTransform: "uppercase"
   },
   body: {
-    height: "80%",
-    flexDirection: "row"
+    height: "75%",
+    flexDirection: "row",
+    paddingBottom: 16
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -88,44 +136,3 @@ const styles = StyleSheet.create({
     width: "100%"
   }
 });
-
-const Stack = createStackNavigator();
-function NavigatorConfig() {
-  return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeComponent} />
-      <Stack.Screen name="Hygiene" component={HygieneComponent} />
-    </Stack.Navigator>
-  );
-}
-
-export default class App extends Component {
-  state = {
-    result: null
-  };
-  render() {
-    return (
-      <NavigationContainer>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <View style={styles.logo}>
-              <Image
-                style={styles.logoImage}
-                source={require("./assets/logo.png")}
-              />
-            </View>
-            <Text style={styles.logoText}>
-              All information related to Covid!
-            </Text>
-          </View>
-          <View style={styles.body}>
-            <SafeAreaView style={styles.container}>
-              <NavigatorConfig />
-            </SafeAreaView>
-          </View>
-          <View style={styles.footer}></View>
-        </View>
-      </NavigationContainer>
-    );
-  }
-}
