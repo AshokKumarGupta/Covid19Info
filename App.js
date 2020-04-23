@@ -14,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import PersonalHygieneComponent from "./src/features/Awareness/PersonalHygieneComponent";
 import FoodHygieneComponent from "./src/features/Awareness/FoodHygiene";
 import HomeComponent from "./src/features/Awareness/HomeComponent";
+import HouseHygiene from "./src/features/Awareness/HouseHygiene";
 
 const Stack = createStackNavigator();
 function NavigatorConfig() {
@@ -25,7 +26,7 @@ function NavigatorConfig() {
         component={PersonalHygieneComponent}
       />
       <Stack.Screen name="Food hygiene" component={FoodHygieneComponent} />
-      <Stack.Screen name="Home hygiene" component={PersonalHygieneComponent} />
+      <Stack.Screen name="Home hygiene" component={HouseHygiene} />
     </Stack.Navigator>
   );
 }

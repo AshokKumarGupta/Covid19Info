@@ -37,7 +37,7 @@ const DATA = [
       },
       {
         title: "Home hygiene",
-        redirect: "Personal hygiene"
+        redirect: "Home hygiene"
       },
       {
         title: "Food hygiene",

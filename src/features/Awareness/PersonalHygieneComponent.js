@@ -1,7 +1,21 @@
 import React, { Component } from "react";
 import { Pages } from "react-native-pages";
-import { View, Image, StyleSheet, Text, Linking } from "react-native";
-import * as WebBrowser from "expo-web-browser";
+import { View, Image, StyleSheet, Text, Linking, FlatList } from "react-native";
+
+const personalHygiene = [
+  { key: "Washing body helps keep it free from disease causing germs." },
+  { key: "Cleaning teeth helps keep gums and teeth healthy." },
+  { key: "Wash your hands after going to toilet." },
+  { key: "Wash your hands and exposed body parts after going to market." },
+  { key: "Wash your hands before preparing food." },
+  { key: "Wash your hands before eating food." },
+  { key: "Washing clothes helps them free from disese-causing germs." },
+  {
+    key:
+      "Hang cloths under Sun, it helps kill some disese-causing germs & parasites."
+  },
+  { key: "Cover nose and mouse when sneezing helps stop the spread of germs." }
+];
 
 export default class PersonalHygieneComponent extends Component {
   render() {
@@ -48,14 +62,13 @@ export default class PersonalHygieneComponent extends Component {
           </Text>
         </View>
         <View style={styles.container}>
-          <Image
-            style={styles.logoImage}
-            source={require("../../../assets/images/nail.png")}
+          <FlatList
+            style={styles.flatList}
+            data={personalHygiene}
+            renderItem={({ item, index }) => (
+              <Text style={styles.item}>{index + 1 + ". " + item.key}</Text>
+            )}
           />
-          <Text style={styles.paragraph}>
-            It is important to keep nails short and trim. So that dirt can't
-            settle under it. Kindly avoid biting and chewing nails.
-          </Text>
         </View>
       </Pages>
     );
@@ -68,7 +81,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4eeff",
     alignContent: "center",
     justifyContent: "center",
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop: 10
   },
   logoImage: {
     padding: 20,
@@ -85,5 +99,8 @@ const styles = StyleSheet.create({
   link: {
     backgroundColor: "#424874",
     color: "white"
+  },
+  item: {
+    fontSize: 18
   }
 });
