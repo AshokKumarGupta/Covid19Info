@@ -50,7 +50,7 @@ const DATA = [
       },
       {
         title: "When you come from outside.",
-        redirect: "FoodHygiene"
+        redirect: "Purchase safety"
       }
     ]
   },
@@ -67,8 +67,8 @@ const DATA = [
           "https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en_GB"
       },
       {
-        title: "Online consultation(India)",
-        redirect: "Hygiene"
+        title: "Ministry of Health &  Family Welfare",
+        redirect: "https://www.mohfw.gov.in/"
       }
     ]
   }

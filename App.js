@@ -15,6 +15,8 @@ import PersonalHygieneComponent from "./src/features/Awareness/PersonalHygieneCo
 import FoodHygieneComponent from "./src/features/Awareness/FoodHygiene";
 import HomeComponent from "./src/features/Awareness/HomeComponent";
 import HouseHygiene from "./src/features/Awareness/HouseHygiene";
+import OutsideComponent from "./src/features/Awareness/OutsideComponent";
+import OnlineConsultation from "./src/features/UsefulLinks/OnlineConsultation";
 
 const Stack = createStackNavigator();
 function NavigatorConfig() {
@@ -27,6 +29,8 @@ function NavigatorConfig() {
       />
       <Stack.Screen name="Food hygiene" component={FoodHygieneComponent} />
       <Stack.Screen name="Home hygiene" component={HouseHygiene} />
+      <Stack.Screen name="Purchase safety" component={OutsideComponent} />
+      <Stack.Screen name="Online consultation" component={OnlineConsultation} />
     </Stack.Navigator>
   );
 }
@@ -47,7 +51,7 @@ export default class App extends Component {
               />
             </View>
             <Text style={styles.logoText}>
-              All information related to Covid!
+              All information related to Covid19!
             </Text>
           </View>
           <View style={styles.body}>
