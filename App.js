@@ -3,13 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   Image,
   SafeAreaView,
-  Button
+  TouchableOpacity
 } from "react-native";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, CommonActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import PersonalHygieneComponent from "./src/features/Awareness/PersonalHygieneComponent";
 import FoodHygieneComponent from "./src/features/Awareness/FoodHygiene";
@@ -19,27 +18,75 @@ import OutsideComponent from "./src/features/Awareness/OutsideComponent";
 import OnlineConsultation from "./src/features/UsefulLinks/OnlineConsultation";
 
 const Stack = createStackNavigator();
-function NavigatorConfig() {
+function NavigatorConfig({ translateTo }) {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeComponent} />
+    <Stack.Navigator
+      initialRouteName={translateTo === "English" ? "Home" : "सूची"}
+    >
       <Stack.Screen
-        name="Personal hygiene"
-        component={PersonalHygieneComponent}
+        name={translateTo === "English" ? "Home" : "सूची"}
+        component={HomeComponent}
+        initialParams={{ language: translateTo }}
       />
-      <Stack.Screen name="Food hygiene" component={FoodHygieneComponent} />
-      <Stack.Screen name="Home hygiene" component={HouseHygiene} />
-      <Stack.Screen name="Purchase safety" component={OutsideComponent} />
-      <Stack.Screen name="Online consultation" component={OnlineConsultation} />
+      <Stack.Screen
+        name={
+          translateTo === "English" ? "Personal hygiene" : "व्यक्तिगत स्वच्छता"
+        }
+        component={PersonalHygieneComponent}
+        initialParams={{ language: translateTo }}
+      />
+      <Stack.Screen
+        name={
+          translateTo === "English" ? "Food hygiene" : "खान - पान की स्वच्छता"
+        }
+        component={FoodHygieneComponent}
+        initialParams={{ language: translateTo }}
+      />
+      <Stack.Screen
+        name={translateTo === "English" ? "Home hygiene" : "घर की स्वच्छता"}
+        component={HouseHygiene}
+        initialParams={{ language: translateTo }}
+      />
+      <Stack.Screen
+        name={
+          translateTo === "English"
+            ? "While purchasing from outside"
+            : "जब आप बाहर से आते हैं।"
+        }
+        component={OutsideComponent}
+        initialParams={{ language: translateTo }}
+      />
+      <Stack.Screen
+        name="Online consultation"
+        component={OnlineConsultation}
+        initialParams={{ language: translateTo }}
+      />
     </Stack.Navigator>
   );
 }
 
 export default class App extends Component {
   state = {
-    result: null
+    result: null,
+    language: "English"
   };
+
+  changeLanguage() {
+    let translateTo = "English";
+    const { language } = this.state;
+
+    if (language === "English") {
+      translateTo = "   हिन्दी";
+    }
+    this.setState({
+      language: translateTo
+    });
+  }
+
   render() {
+    const { language } = this.state;
+    const { navigation } = this.props;
+
     return (
       <NavigationContainer>
         <View style={styles.container}>
@@ -51,12 +98,26 @@ export default class App extends Component {
               />
             </View>
             <Text style={styles.logoText}>
-              All information related to Covid19!
+              {language === "English"
+                ? "Information related to Covid19!"
+                : "Covid19 से संबंधित जानकारी!"}
             </Text>
+            <View style={styles.translateContainer}>
+              <View style={styles.translateImage}>
+                <TouchableOpacity onPress={() => this.changeLanguage()}>
+                  <Image
+                    title="Translate to English/Hindi"
+                    style={styles.icon}
+                    source={require("./assets/images/translate.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Text>{language}</Text>
+            </View>
           </View>
           <View style={styles.body}>
             <SafeAreaView style={styles.container}>
-              <NavigatorConfig />
+              <NavigatorConfig translateTo={language} />
             </SafeAreaView>
           </View>
           <View style={styles.footer}></View>
@@ -139,5 +200,21 @@ const styles = StyleSheet.create({
   },
   section: {
     width: "100%"
+  },
+  translateContainer: {
+    position: "absolute",
+    right: 20,
+    top: 40
+  },
+  translateImage: {
+    borderRadius: 100,
+    backgroundColor: "#ffffff",
+    padding: 5,
+    borderColor: "#555",
+    borderWidth: 2
+  },
+  icon: {
+    width: 32,
+    height: 32
   }
 });

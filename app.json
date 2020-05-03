@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "simplyBuy",
-    "slug": "simplyBuy",
+    "name": "Covid 19",
+    "slug": "rishit-random-code",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.randomcode",
+      "package": "com.rishitworld.covid",
       "versionCode": 1
     }
   }
